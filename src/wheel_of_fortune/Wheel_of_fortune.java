@@ -6,9 +6,15 @@
 package wheel_of_fortune;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -17,13 +23,32 @@ import javafx.stage.Stage;
  */
 public class Wheel_of_fortune extends Application {
   
+  private EventHandler<KeyEvent> keyListener;    
+  public Scene scene;
+  
   @Override
   public void start(Stage stage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
+   
+    Parent root;
     
-    Scene scene = new Scene(root);
+    root = loader.load();
     
+    String image = getClass().getResource("/bckg.jpg").toString();
+    
+    scene = new Scene(root);
+    
+    scene.getRoot().requestFocus();
+    scene.getRoot().setStyle("-fx-background-image: url('" + image + "'); " +
+           "-fx-background-position: center center; " +
+           "-fx-background-repeat: stretch;");
+    
+    
+    stage.setMaximized(true);
+    stage.setFullScreen(true);
+    stage.setTitle("Wheel of fortune, watch out!");
     stage.setScene(scene);
+    ((FXMLDocumentController) loader.getController()).setScene(scene);
     stage.show();
   }
 

@@ -1,9 +1,9 @@
 # Ignore everything
-*
 
+dist/*
+build/*
+manifest.mf
+nbproject/
+build.xml
 # But not these files...
 !.gitignore
-!*.java
-
-# ...even if they are in subdirectories
-!*/
